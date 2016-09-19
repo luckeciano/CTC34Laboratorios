@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1474315824 source:c:\users\lenovo\documents\ita\3º ano\6º semestre\ctc-34\nfatoregexp\src\nfatoregexp.cpp
+	"NFAToRegExp.h"
+
+1474314683 c:\users\lenovo\documents\ita\3º ano\6º semestre\ctc-34\nfatoregexp\include\nfatoregexp.h
+	<string>
+	<vector>
+	<map>
+	<fstream>
+	<iostream>
+	<algorithm>
+

@@ -1,0 +1,27 @@
+Initial Automata:
+State -1:
+0 &
+State 0:
+3 &
+State 3:
+3 (a+b)
+2 &
+State 2:
+4 b
+State 4:
+5 b
+State 5:
+6 &
+State 6:
+6 (b+a)
+1 &
+State 1:
+-2 &
+State -2:
+
+Final Automata:
+State -1:
+-2 &&(a+b)*&bb&(b+a)*&&
+State -2:
+
+Regular Expression: (a+b)*bb(b+a)*

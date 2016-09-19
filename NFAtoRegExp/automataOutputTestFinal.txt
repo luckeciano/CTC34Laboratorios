@@ -1,0 +1,18 @@
+Initial Automata:
+State -1:
+0 &
+State 0:
+1 (a+b)
+State 1:
+0 a
+2 b
+State 2:
+-2 &
+State -2:
+
+Final Automata:
+State -1:
+-2 &((a+b)a)*b&
+State -2:
+
+Regular Expression: ((a+b)a)*b

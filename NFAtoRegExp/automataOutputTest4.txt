@@ -1,0 +1,28 @@
+Initial Automata:
+State -1:
+0 &
+State 0:
+3 &
+State 3:
+3 a
+2 &
+State 2:
+5 &
+State 5:
+5 b
+4 &
+State 4:
+6 &
+State 6:
+6 c
+1 &
+State 1:
+-2 &
+State -2:
+
+Final Automata:
+State -1:
+-2 &&a*&&b*&&c*&&
+State -2:
+
+Regular Expression: a*b*c*
