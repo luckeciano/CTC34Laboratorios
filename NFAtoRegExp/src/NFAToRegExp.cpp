@@ -1,5 +1,8 @@
 #include "NFAToRegExp.h"
 
+
+//Construtor: Lê o arquivo e gera a estrutura correspondente ao autômato
+//Adicionalmente, já adiciona estados final e inicial
 NFAToRegExp::NFAToRegExp(string &automataPath)
 {
     ifstream myFile;
@@ -41,6 +44,8 @@ NFAToRegExp::NFAToRegExp(string &automataPath)
     } else cout << "Unable to open " << automataPath << endl;
 }
 
+//Adiciona estado inicial ao autômato, criando uma transição épsilon entre este
+//e o antigo estado inicial
 void NFAToRegExp::addInitialState() {
     vector <pair <string, int> > aux;
     aux.push_back(make_pair("&", this->initialState));
@@ -49,6 +54,8 @@ void NFAToRegExp::addInitialState() {
 
 }
 
+//Adiciona o estado final ao autômato, criando uma transição épsilon do estado final
+//anterior até este novo
 void NFAToRegExp::addFinalState() {
     bool existsInAutomata = false;
     for (int i = 0; i < automata.size() && !existsInAutomata; i++) {
@@ -71,6 +78,8 @@ void NFAToRegExp::addFinalState() {
 
 }
 
+//Imprime o autômato antes e depois da remoção de estados
+//imprime também a expressão regular
 void NFAToRegExp::printAutomata(string outputPath) {
     ofstream output(outputPath);
     output << "Initial Automata:" << endl;
@@ -116,6 +125,7 @@ void NFAToRegExp::adjustRepeatedHeights() {
 
 }
 
+//Responsável por criar fechamentos e novas transições para remover estados
 void NFAToRegExp::modifyInitStateHeight(string weight, int newDestiny, int stateToRemove, bool isKleene){
 
 
@@ -153,6 +163,7 @@ void NFAToRegExp::modifyInitStateHeight(string weight, int newDestiny, int state
         }
     }
 }
+//Método que gerencia a atividade de remoção de estado
 void NFAToRegExp::removeState(int stateToRemove) {
     checkAndRemoveBidirectional(stateToRemove);
     vector< pair<int, vector<pair<string, int> > > >::iterator it;
@@ -176,6 +187,7 @@ void NFAToRegExp::removeState(int stateToRemove) {
     }
 }
 
+//Método que checa e remove bidirecionalidade no autômato
 void NFAToRegExp::checkAndRemoveBidirectional(int stateToRemove) {
     vector< pair<int, vector<pair<string, int> > > >::iterator itStateToRemove;
     vector< pair<int, vector<pair<string, int> > > >::iterator itDestinyBidirectional;
@@ -213,13 +225,14 @@ void NFAToRegExp::checkAndRemoveBidirectional(int stateToRemove) {
     }
 
 }
-
+//Retira as transições epsilons para resultar na expressão regular
 void NFAToRegExp::deleteEpsilonTransitions() {
     for (int i = 0; i < regularExpression.size(); i++) {
         regularExpression.erase (std::remove(regularExpression.begin(), regularExpression.end(), '&'), regularExpression.end());
     }
 }
 
+//Gera expressão regular, ajustanto as transições em paralelo e removendo estado por estado
 void NFAToRegExp::generateRegularExpression() {
     regularExpression = "";
     while (true) {
@@ -238,7 +251,7 @@ NFAToRegExp::~NFAToRegExp()
 {
     //dtor
 }
-
+//Main com casos de teste
 int main() {
     string path = "automata.txt";
     string outputPath = "automataOutput.txt";
